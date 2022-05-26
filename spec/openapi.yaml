@@ -38,6 +38,19 @@ paths:
         401:
           $ref: "#/components/responses/Unauthorized"
 
+  /api/v1/files/{storage}/{path}:
+    get:
+      summary: file metadata
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileInfo"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
 components:
   schemas:
     Version:
@@ -67,6 +80,124 @@ components:
         - printer
         - text
         - firmware
+
+    FileInfo:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "PRINT_FILE"
+        refs:
+          type: object
+          properties:
+            download:
+              type: string
+              example: "/api/files/local/Spice_Harvester_0.3mm_PLA_MK3S_42m.gcode/raw"
+            icon:
+              type: string
+              example: "/api/thumbnails/local/Spice_Harvester_0.3mm_PLA_MK3S_42m.gcode.small.png"
+            thumbnail:
+              type: string
+              example: "/api/thumbnails/local/Spice_Harvester_0.3mm_PLA_MK3S_42m.gcode.orig.png"
+        size:
+          type: integer
+          example: 424242
+        path:
+          type: string
+          example: "/local/Spice_Harvester_0.3mm_PLA_MK3S_42m.gcode"
+        name:
+          type: string
+          example: "Spice_Harvester_0.3mm_PLA_MK3S_12m.gcode"
+        creation_timestamp:
+          type: integer
+          example: 1648038843
+        ro:
+          type: boolean
+          example: False
+        metadata:
+          type: object
+          properties:
+            bed_temperature:
+              type: integer
+              example: 60
+            nozzle_temperature:
+              type: integer
+              example: 215
+            brim_width:
+              type: number
+              example: 0
+            estimated printing time (normal mode):
+              type: string
+              example: "42m 42s"
+            faded_layers:
+              type: integer
+              example: 42
+            filament cost:
+              type: number
+              example: 0.57
+            filament used [cm3]:
+              type: number
+              example: 12.44
+            filament used [g]:
+              type: number
+              example: 15.79
+            filament used [mm]:
+              type: number
+              example: 5170.06
+            filament_type:
+              type: string
+              example: "PLA"
+            filament_length:
+              type: number
+              example: 4.2
+            fill_density:
+              type: string
+              example: "20%"
+            initial_exposure_time:
+              type: integer
+              example: 5
+            layer_height:
+              type: string
+              example: "0.3"
+            material_name:
+              type: string
+              example: "PLA Sandstorm Orange"
+            exposure_time:
+              type: integer
+              example: 2
+            max_exposure_time:
+              type: integer
+              example: 3
+            max_initial_exposure_time:
+              type: integer
+              example: 3
+            min_exposure_time:
+              type: integer
+              example: 1
+            min_initial_exposure_time:
+              type: integer
+              example: 1
+            nozzle_diameter:
+              type: string
+              example: "0.4"
+            print_time:
+              type: integer
+              example: 2562
+            printer_model:
+              type: string
+              example: "1.3.1"
+            support_material:
+              type: string
+              example: "PLA"
+            ironing:
+              type: boolean
+              example: False
+            required_resin_ml:
+              type: number
+              example: 123.4
+            profile:
+              type: string
+              example: "ultra_fast"
 
     Info:
       type: object
